@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Transient;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +16,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@Transactional
 @Log4j2
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
-  private final PasswordEncoder passwordEncoder;
+  private final BCryptPasswordEncoder passwordEncoder;
 
   @Override
   public User saveUser(User user) {
@@ -36,8 +36,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void changeRole(Role nowRole, String username) {
-    userRepository.updateUserRole(username, nowRole);
+  @Transactional
+  public void changeRole(String username, Role newRole) {
+    userRepository.updateUserRole(username, newRole);
   }
 
   @Override

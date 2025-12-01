@@ -1,5 +1,6 @@
 package com.jungeun.shopbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,7 +25,7 @@ public class User {
   @Column(unique = true, nullable = false, length = 50)
   private String username;
 
-  @Column(nullable = false, length = 50)
+  @Column(nullable = false, length = 200)
   private String password;
 
   @Column(nullable = false, length = 50)
@@ -32,7 +33,8 @@ public class User {
 
   @Column(name = "create_time", nullable = false)
   @CreationTimestamp
-  @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//  @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
   private LocalDateTime createTime;
 
   @Enumerated(EnumType.STRING)

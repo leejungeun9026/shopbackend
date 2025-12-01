@@ -13,9 +13,9 @@ public class ShopbackendApplication {
     SpringApplication.run(ShopbackendApplication.class, args);
   }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    // 여기 Bean생성할때는 @Configuration안써도 됨 
-    return new BCryptPasswordEncoder();
-  }
+//  @Bean
+//  public BCryptPasswordEncoder passwordEncoder() {
+//    // 여기 Bean생성할때는 @Configuration안써도 됨
+//    return new BCryptPasswordEncoder();
+//  }
 }
